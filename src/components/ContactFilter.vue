@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     filter() {
-      console.log(this.filterBy);
       this.$emit("filterList", { ...this.filterBy });
     },
   },

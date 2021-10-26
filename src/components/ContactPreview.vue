@@ -1,7 +1,7 @@
 <template>
   <router-link :to="`contact/${contact._id}`" class="flex align-center gap20">
     <div class="img-info">
-      <img :src="`https://robohash.org/${idx}}`" />
+      <img :src="`https://robohash.org/${idx}.png?set=set5}`" />
     </div>
     <h1 class="fs28">{{ contact.name }}</h1>
   </router-link>
