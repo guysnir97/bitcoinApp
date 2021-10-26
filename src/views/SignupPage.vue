@@ -51,14 +51,8 @@ export default {
     };
   },
   methods: {
-<<<<<<< HEAD
-    async onSubmit() {
-      await this.$store.dispatch({ type: "submit", user: this.user });
-      this.$router.push("/");
-=======
     onSubmit() {
       this.$store.dispatch({ type: "onSubmit", user: this.user });
->>>>>>> fdcf7d7d30eab3b567be7c140cea34bf812de7ed
     },
     async onLogin() {
       const user = {
