@@ -1,18 +1,40 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-if="islogin" class="home-page">
+    <div class="user-info">
+      <h1>Hello {{ user.name }}!</h1>
+      <h1>coins: {{ user.coins }}</h1>
+      <h1>bitCoinRate {{ bitCoinRate }}</h1>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import userService from "../services/user.service";
+import bitCoinService from "../services/bitcoin.service";
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "Home",
+  data() {
+    return {
+      user: null,
+      bitCoinRate: null,
+    };
+  },
+  async created() {
+    this.bitCoinRate = await bitCoinService.getRate();
+  },
+  computed: {
+    loggedInUser() {
+      return this.$store.getters.loggedInUser;
+    },
+    islogin() {
+      if (!this.loggedInUser) this.$router.push("/user");
+    },
+  },
+  methods: {
+    async loadUser() {
+      this.user = await userService.getUser();
+    },
+  },
+};
 </script>
+

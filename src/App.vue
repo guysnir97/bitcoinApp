@@ -1,12 +1,29 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <AppHeader :loggedInUser="loggedInUser" />
+    <router-view class="layout main-container" />
+    <AppFooter />
   </div>
 </template>
+
+<script>
+import AppHeader from "./components/Appheader";
+import AppFooter from "./components/AppFooter";
+export default {
+  name: "App",
+
+  computed: {
+    loggedInUser() {
+      return this.$store.getters.loggedInUser;
+    },
+  },
+  components: {
+    AppHeader,
+    AppFooter,
+  },
+};
+</script>
+
 
 <style>
 #app {
@@ -28,5 +45,8 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.layout {
+  height: calc(100vh - 98px);
 }
 </style>
