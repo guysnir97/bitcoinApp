@@ -13,21 +13,27 @@ export default {
         setContacts(state, { contacts }) {
             state.contacts = contacts
         },
+        saveContact(state, { savedContact }) {
+            const idx = state.contacts.findIndex(contact => contact._id === savedContact._id)
+            if (idx === -1) state.contacts.unshift(savedContact)
+            else state.contacts.splice(idx, 1, savedContact)
+        }
     },
+
     actions: {
         async loadContacts({ commit }) {
             const contacts = await contactService.query()
             commit({ type: 'setContacts', contacts })
-            console.log(this.state);
         },
 
-        // async saveContcat({ commit }, { contact })
-
+        async saveContcat({ commit }, { contact }) {
+            const savedContact = await contactService.save(contact)
+            commit({ type: 'saveContact', savedContact })
+        },
+        
         async transfer(commit, {amount,to}) {
             await contactService.transferCoins(amount,to)
          }
-        // const contact = await contactService.save() 
-
 
     }
 
