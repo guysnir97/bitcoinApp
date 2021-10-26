@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      debugger;
       this.$store.dispatch({ type: "onSubmit", user: this.user });
     },
     onLogin() {
