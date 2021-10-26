@@ -25,6 +25,7 @@ async function query() {
 
 async function save(user) {
     if (user._id) {
+        if (userService.getLoggedInUser()._id === user._id) sessionStorage.setItem('loggedInUser', JSON.stringify(user));
         return await DbService.put(KEY, user)
     } else {
         return await DbService.post(KEY, user)
@@ -43,11 +44,14 @@ function remove(contact) {
 
 async function transferCoins(amount, to) {
     const user = await userService.getLoggedInUser()
-    user.coins -= amount
-    await DbService.put(KEY, user)
+    console.log('user??', user);
+    user.setCoins(user.getCoins() - amount)
+    // user.coins -= amount
+    save(user)
     const recivingUser = await userService.getUserById(to)
-    recivingUser.coins += amount
-    await DbService.put(KEY, recivingUser)
+    recivingUser.setCoins(recivingUser.getCoins() + amount)
+    // recivingUser.coins += amount
+    save(recivingUser)
 }
 
 function getEmptyContact() {

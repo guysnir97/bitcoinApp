@@ -26,14 +26,19 @@ export default {
             commit({ type: 'setContacts', contacts })
         },
 
-        async saveContcat({ commit }, { contact }) {
+        async saveContact({ commit }, { contact }) {
             const savedContact = await contactService.save(contact)
             commit({ type: 'saveContact', savedContact })
         },
-        
-        async transfer(commit, {amount,to}) {
-            await contactService.transferCoins(amount,to)
-         }
+
+        async transfer(commit, { amount, to }) {
+        debugger
+            await contactService.transferCoins(amount, to)
+            const loggedInUser = userService.getLoggedInUser()
+            commit({ type: 'saveContact', savedContact: loggedInUser })
+            const recivingUser = userService.getUserById(to)
+            commit({ type: 'saveContact', savedContact: recivingUser })
+        }
 
     }
 

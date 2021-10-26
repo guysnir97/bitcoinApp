@@ -52,7 +52,7 @@ export default {
   methods: {
     async onSaveContact() {
       await this.$store.dispatch({
-        type: "saveContcat",
+        type: "saveContact",
         contact: this.contact,
       });
       this.$router.push("/contact");

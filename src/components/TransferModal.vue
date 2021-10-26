@@ -1,7 +1,7 @@
 <template>
   <div class="transfer-modal-container">
-    <h1>Transfer to {{ user.name }}</h1>
-    <form @Submit.prevent="onTransfer">
+    <h1>Transfer to {{ contact.name }}</h1>
+    <form @submit.prevent="onTransfer">
       <label for="amount">How much?</label>
       <input v-model="transferAmount" type="number" id="amount" />
       <button>Submit</button>
@@ -17,12 +17,12 @@ export default {
     };
   },
 
-  props: ["user"],
+  props: ["contact"],
 
   methods: {
     onTransfer() {
       if (this.transferAmount > this.$store.getters.loggedInUser.coins) return console.log('insufficient bunds');
-       else this.$store.dispatch({type: transfer, transferData: {amount: this.transferAmount, to: this.user._id}});
+       else this.$store.dispatch({type: 'transfer', transferData: {amount: this.transferAmount, to: this.contact._id}});
     },
   },
 };

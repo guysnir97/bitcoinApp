@@ -11,12 +11,15 @@
         <router-link :to="`/contact/edit/${contact._id}`">edit</router-link>
       </div>
     </div>
+    <transfer-modal :contact="contact"/>
   </section>
 </template>
 
 <script>
+import TransferModal from '../components/TransferModal.vue';
 import contactService from "../services/contact.service";
 export default {
+  components: { TransferModal },
   name: "detailsPage",
   data() {
     return {
