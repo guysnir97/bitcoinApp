@@ -8,7 +8,8 @@ export default {
     submit,
     login,
     logout,
-    getLoggedInUser
+    getLoggedInUser,
+    getUserById
 }
 
 
@@ -23,6 +24,11 @@ async function login(creds) {
     if (!LoggedinUser) throw new Error('invalid details');
     else return _saveLocalUser(LoggedinUser)
 
+}
+
+async function getUserById(userId) {
+    const user = await DbService.get(KEY,userId)
+    return user
 }
 
 async function logout() {

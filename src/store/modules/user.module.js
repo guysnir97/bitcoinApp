@@ -1,4 +1,5 @@
 import userService from "../../services/user.service";
+import contactService from "../../services/contact.service";
 export default {
     state: {
         loggedInUser: null
@@ -16,7 +17,7 @@ export default {
     },
 
     actions: {
-        async submit({ commit }, { user }) {
+        async signup({ commit }, { user }) {
             const loggedUser = await userService.submit(user)
             commit({ type: 'setLoggedInUser', loggedUser })
         },
@@ -30,7 +31,8 @@ export default {
         },
         async loadUser({ commit }, { loggedUser }) {
             commit({ type: 'setLoggedInUser', loggedUser })
-        }
+        },
+        
 
     }
 

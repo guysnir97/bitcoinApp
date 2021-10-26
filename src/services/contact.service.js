@@ -1,12 +1,14 @@
 import baseContacts from '../data/contacts.json';
 import { DbService } from "./db.service";
+import userService from './user.service';
 
 export default {
     query,
     getById,
     save,
     getEmptyContact,
-    remove
+    remove,
+    transferCoins
 }
 
 
@@ -37,6 +39,15 @@ async function getById(contactId) {
 function remove(contact) {
     return DbService.remove(KEY, contact)
 
+}
+
+async function transferCoins(amount, to) {
+    const user = await userService.getLoggedInUser()
+    user.coins -= amount
+    await DbService.put(KEY, user)
+    const recivingUser = await userService.getUserById(to)
+    recivingUser.coins += amount
+    await DbService.put(KEY, recivingUser)
 }
 
 function getEmptyContact() {

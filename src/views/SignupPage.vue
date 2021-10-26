@@ -52,7 +52,8 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch({ type: "onSubmit", user: this.user });
+      this.$store.dispatch({ type: "signup", user: this.user });
+      this.$router.push("/");
     },
     async onLogin() {
       const user = {

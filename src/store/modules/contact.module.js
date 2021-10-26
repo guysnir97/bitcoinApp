@@ -20,7 +20,12 @@ export default {
             commit({ type: 'setContacts', contacts })
             console.log(this.state);
         },
-        async saveContcat({ commit }, { contact })
+
+        // async saveContcat({ commit }, { contact })
+
+        async transfer(commit, {amount,to}) {
+            await contactService.transferCoins(amount,to)
+         }
         // const contact = await contactService.save() 
 
 
