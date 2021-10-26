@@ -28,7 +28,7 @@
         </div>
         <div class="btn flex space-between column align-center gap10">
           <button v-if="!isSignup" @click="onToggleForm">
-            dont have account? sign here
+            Dont have an account? Sign Now!
           </button>
           <button>{{ isSignup ? "signup" : "login" }}</button>
         </div>
@@ -51,16 +51,17 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      debugger;
-      this.$store.dispatch({ type: "onSubmit", user: this.user });
+    async onSubmit() {
+      await this.$store.dispatch({ type: "submit", user: this.user });
+      this.$router.push("/");
     },
-    onLogin() {
+    async onLogin() {
       const user = {
         name: this.user.name,
         password: this.user.password,
       };
-      this.$store.dispatch({ type: "login", user });
+      await this.$store.dispatch({ type: "login", user });
+      this.$router.push("/");
     },
     onToggleForm() {
       this.isSignup = !this.isSignup;

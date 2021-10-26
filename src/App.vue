@@ -6,12 +6,17 @@
   </div>
 </template>
 
+
 <script>
 import AppHeader from "./components/Appheader";
+import userService from "./services/user.service";
 import AppFooter from "./components/AppFooter";
 export default {
   name: "App",
-
+  created() {
+    const loggedUser = userService.getLoggedInUser();
+    this.$store.dispatch({ type: 'loadUser', loggedUser });
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedInUser;

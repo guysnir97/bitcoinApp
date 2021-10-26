@@ -33,6 +33,12 @@ const routes = [{
         name: 'SignupPage',
         component: SignupPage
     },
+    {
+        path: '*',
+        name: 'Home',
+        component: Home
+    }
+
 ]
 
 const router = new VueRouter({
@@ -42,3 +48,11 @@ const router = new VueRouter({
 })
 
 export default router
+// router.beforeEach((to, from, next) => {
+//   if (to.path.includes('/user')) {
+//     const user = userService.getLoggedInUser();
+//     if (!user.isAdmin) next('/');
+//     else next();
+//   }
+//   else next();
+// });

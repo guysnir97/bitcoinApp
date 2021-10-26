@@ -1,47 +1,38 @@
 import { DbService } from "./db.service";
-const KEY = 'user_db'
+
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedInUser'
 
+const KEY = 'contcat_db'
+
 export default {
-    getUser,
-    save,
+    submit,
     login,
     logout,
     getLoggedInUser
 }
 
-function getUser() {
-    const loggedInUser = {
-        name: 'Puki',
-        coins: 100,
-        moves: []
-    }
-    return loggedInUser
-}
 
-async function save(user) {
-    let userSaved;
-    if (user._id) {
-        userSaved = await DbService.put(KEY, user)
-    } else {
-        userSaved = await DbService.post(KEY, {...user, coins: 100, moves: [] })
-    }
+async function submit(user) {
+    const userSaved = await DbService.post(KEY, {...user, coins: 100, moves: [] })
     return _saveLocalUser(userSaved)
 }
 
-function login(creds) {
+async function login(creds) {
+    const contacts = await DbService.query(KEY)
+    const LoggedinUser = contacts.find(contact => contact.password === creds.password && contact.name === creds.name)
+    if (!LoggedinUser) throw new Error('invalid details');
+    else return _saveLocalUser(LoggedinUser)
 
 }
 
-function logout(params) {
-
-}
-
-function getLoggedInUser() {
-    const user = (sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || null)
+async function logout() {
+    const user = sessionStorage.clear(STORAGE_KEY_LOGGEDIN_USER);
     return user
+}
 
-
+async function getLoggedInUser() {
+    const user = await (JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER)) || null)
+    return user
 }
 
 function _saveLocalUser(user) {

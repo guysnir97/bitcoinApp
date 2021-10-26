@@ -1,37 +1,42 @@
 import userService from "../../services/user.service";
 export default {
     state: {
-        users: [],
         loggedInUser: null
     },
     getters: {
-        users(state) {
-            return state.users
-        },
         loggedInUser({ loggedInUser }) {
             return loggedInUser
         }
     },
     mutations: {
-        submit(state, { savedUser }) {
-            const idx = state.users.findIndex(currUser => user._id === currUser._id);
-            console.log(idx);
-            if (idx === -1) state.users.push(savedUser);
-            else state.users.splice(idx, 1, savedUser);
+        setLoggedInUser(state, { loggedUser }) {
+            state.loggedInUser = loggedUser
         },
-        setLoggedInUser(state, { user }) {
-            state.loggedInUser = user
-        }
+
     },
+
     actions: {
         async submit({ commit }, { user }) {
-            const savedUser = await userService.save(user)
-            commit({ type: 'onSubmit', savedUser })
+            const loggedUser = await userService.submit(user)
+            commit({ type: 'setLoggedInUser', loggedUser })
         },
-        async loadUser({ commit }) {
-            const user = userService.getLoggedInUser()
-            if (user) commit({ type: 'setLoggedInUser', user })
+        async login({ commit }, { user }) {
+            const loggedUser = await userService.login(user)
+            commit({ type: 'setLoggedInUser', loggedUser })
+        },
+        async logout({ commit }) {
+            await userService.logout()
+            commit({ type: 'setLoggedInUser', user: null })
+        },
+        async loadUser({ commit }, { loggedUser }) {
+            commit({ type: 'setLoggedInUser', loggedUser })
         }
+
     }
 
 };
+// submit(state, { savedUser }) {
+//     const idx = state.users.findIndex(currUser => user._id === currUser._id);
+//     console.log(idx);
+//     if (idx === -1) state.users.push(savedUser);
+//     else state.users.splice(idx, 1, savedUser);

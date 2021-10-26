@@ -1,4 +1,12 @@
 .main-header {
     height: 80px;
     background-color: azure;
+    a {
+        color: rgb(19, 17, 17);
+    }
+    .btn-logout {
+        border: none;
+        background: inherit;
+        font-size: 16px;
+    }
 }

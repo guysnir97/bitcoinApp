@@ -4,18 +4,30 @@
       <div class="logo">
         <h1>MisterBitCoin</h1>
       </div>
-      <nav class="main-nav flex gap10">
-        <router-link to="/">home</router-link>
-        <router-link to="/contact">contact</router-link>
-        <router-link to="/user">login</router-link>
+      <nav class="main-nav align-center flex gap10">
+        <template v-if="loggedInUser">
+          <router-link to="/">home</router-link>
+          <router-link to="/contact">contact</router-link>
+        </template>
+        <template v-if="loggedInUser">
+          <button class="btn-logout" @click="onLogout">logout</button>
+        </template>
+        <router-link v-else to="/user">login</router-link>
       </nav>
     </div>
   </header>
 </template>
-
+ 
 <script>
 export default {
   name: "AppHeader",
+
+  methods: {
+    async onLogout() {
+      await this.$store.dispatch({ type: "logout" });
+      this.$router.push("/user");
+    },
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedInUser;
@@ -25,4 +37,5 @@ export default {
 </script>
 
 <style>
+
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div v-if="islogin" class="home-page">
+  <div v-if="loggedInUser" class="home-page">
     <div class="user-info">
-      <h1>Hello {{ user.name }}!</h1>
-      <h1>coins: {{ user.coins }}</h1>
+      <h1>Hello {{ loggedInUser.name }}!</h1>
+      <h1>coins: {{ loggedInUser.coins }}</h1>
       <h1>bitCoinRate {{ bitCoinRate }}</h1>
     </div>
   </div>
@@ -20,15 +20,18 @@ export default {
     };
   },
   async created() {
+    if (!this.$store.getters.loggedInUser) this.$router.push("/user");
     this.bitCoinRate = await bitCoinService.getRate();
   },
   computed: {
     loggedInUser() {
+      console.log("log user", this.$store.getters.loggedInUser);
       return this.$store.getters.loggedInUser;
     },
-    islogin() {
-      if (!this.loggedInUser) this.$router.push("/user");
-    },
+    // islogin() {
+    //   if (!this.loggedInUser) this.$router.push("/user");
+    //   else return true;
+    // },
   },
   methods: {
     async loadUser() {
