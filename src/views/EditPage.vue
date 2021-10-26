@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     async onSaveContact() {
-      await this.$store.dispacth({
-        type: "saveContact",
+      await this.$store.dispatch({
+        type: "saveContcat",
         contact: this.contact,
       });
       this.$router.push("/contact");
