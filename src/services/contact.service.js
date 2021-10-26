@@ -1,4 +1,4 @@
-import baseContacts from './contacts.json';
+import baseContacts from '../data/contacts.json';
 import { DbService } from "./db.service";
 
 export default {

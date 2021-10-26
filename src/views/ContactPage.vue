@@ -1,5 +1,6 @@
 <template>
-  <main class="contact-page">
+  <main class="contact-page  flex column gap10 align-center justify-center ">
+    <h1>Contacts</h1>
     <ContactFilter @filterList="onSetFilter" />
     <ContactList :contacts="contactsToDisplay" />
   </main>

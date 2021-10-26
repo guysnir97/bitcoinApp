@@ -22,17 +22,5 @@ export default {
 </script>
 
 <style lang="scss" >
-li {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-}
-.contact-list {
-  background: aliceblue;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 20px;
-  line-height: 45px;
-}
+
 </style>

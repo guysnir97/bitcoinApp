@@ -1,0 +1,25 @@
+.contact-page {
+    background: aliceblue;
+
+h1 {
+font-size: 30px;
+margin-top: 10px;
+}
+    li {
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    .contact-list {
+        overflow-x: none;
+        overflow-y: auto;
+        height:70vh;
+        outline: 1px solid black;
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 20px;
+        line-height: 45px;
+    }
+}
