@@ -13,9 +13,10 @@ import userService from "./services/user.service";
 import AppFooter from "./components/AppFooter";
 export default {
   name: "App",
-  created() {
-    const loggedUser = userService.getLoggedInUser();
-    this.$store.dispatch({ type: 'loadUser', loggedUser });
+  async created() {
+    const loggedUser = await userService.getLoggedInUser();
+    this.$store.dispatch({ type: "loadUser", loggedUser });
+    this.$store.dispatch({ type: "loadContacts"});
   },
   computed: {
     loggedInUser() {

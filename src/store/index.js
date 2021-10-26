@@ -1,21 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import contactModule from '@/store/modules/user.module';
+import userModule from '@/store/modules/user.module';
+import contactModule from './modules/contact.module';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     strict: true,
-    getters: {
-
-    },
-
-    mutations: {
-
-    },
-    actions: {
-
-    },
     modules: {
+        userModule,
         contactModule
     }
 });

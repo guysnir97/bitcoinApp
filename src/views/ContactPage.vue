@@ -1,5 +1,5 @@
 <template>
-  <main class="contact-page  flex column gap10 align-center justify-center ">
+  <main class="contact-page flex column gap10 align-center justify-center">
     <h1>Contacts</h1>
     <ContactFilter @filterList="onSetFilter" />
     <ContactList :contacts="contactsToDisplay" />
@@ -9,35 +9,25 @@
 <script>
 import ContactList from "../components/ContactList";
 import ContactFilter from "../components/ContactFilter";
-import contactSerivce from "../services/contact.service";
 export default {
   name: "ContactPage",
   data() {
     return {
-      contacts: [],
       filterBy: null,
     };
   },
-//dvdvdv
-  created() {
-    this.loadContacts();
-  },
   computed: {
     contactsToDisplay() {
-      const { filterBy, contacts } = this;
-
-      if (!filterBy) return this.contacts;
+      const contacts = this.$store.getters.contacts;
+      if (!this.filterBy) return contacts;
 
       const contactsToDisplay = contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(filterBy.txt.toLowerCase())
+        contact.name.toLowerCase().includes(this.filterBy.txt.toLowerCase())
       );
       return contactsToDisplay;
     },
   },
   methods: {
-    async loadContacts() {
-      this.contacts = await contactSerivce.query();
-    },
     onSetFilter(filterBy) {
       this.filterBy = filterBy;
     },

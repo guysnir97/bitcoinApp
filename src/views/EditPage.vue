@@ -4,10 +4,20 @@
       @submit.prevent="onSaveContact"
       class="flex column align-center justify-center fh20 gap10"
     >
-      <input type="text" placeholder="fullname" v-model="contact.name" required />
+      <input
+        type="text"
+        placeholder="fullname"
+        v-model="contact.name"
+        required
+      />
       <input type="text" placeholder="email" v-model="contact.email" required />
       <input type="text" placeholder="phone" v-model="contact.phone" required />
-      <input type="text" placeholder="password" v-model="contact.password" required />
+      <input
+        type="text"
+        placeholder="password"
+        v-model="contact.password"
+        required
+      />
       <label>
         <span>Is Admin</span>
         <input type="checkbox" v-model="contact.isAdmin" />
@@ -41,7 +51,10 @@ export default {
   },
   methods: {
     async onSaveContact() {
-      await contactSerivce.save(this.contact);
+      await this.$store.dispacth({
+        type: "saveContact",
+        contact: this.contact,
+      });
       this.$router.push("/contact");
     },
 

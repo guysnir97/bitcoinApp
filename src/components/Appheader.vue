@@ -30,6 +30,7 @@ export default {
   },
   computed: {
     loggedInUser() {
+     
       return this.$store.getters.loggedInUser;
     },
   },
@@ -37,5 +38,4 @@ export default {
 </script>
 
 <style>
-
 </style>
