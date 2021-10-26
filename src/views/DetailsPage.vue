@@ -30,7 +30,6 @@ export default {
     async loadContact() {
       const { contactId } = this.$route.params;
       const contact = await contactService.getById(contactId);
-      console.log("contact", contact);
       this.contact = contact;
     },
   },

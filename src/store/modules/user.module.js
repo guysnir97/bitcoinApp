@@ -15,7 +15,6 @@ export default {
     mutations: {
         submit(state, { savedUser }) {
             const idx = state.users.findIndex(currUser => user._id === currUser._id);
-            console.log(idx);
             if (idx === -1) state.users.push(savedUser);
             else state.users.splice(idx, 1, savedUser);
         },

@@ -31,7 +31,6 @@ async function save(user) {
 
 async function getById(contactId) {
     const contact = await DbService.get(KEY, contactId)
-    console.log('contacttt', contact);
     return contact
 }
 
